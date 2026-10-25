@@ -1,0 +1,15 @@
+==>
+.venv is a virtual enviroment it helps to install packges inside this enviroment in one box specific to the project
+==> here we are following openAPI standards
+==> 
+Role       Who                                               Example
+user      you the human                                hi how are you
+assistant   the model'own replies                     f hello i'm qween
+system    Hidden instructions that set the Ai model's behaviour You are a helpful teacher
+
+==> To avoid the hardcoded values we are using env file
+.load_env() # by default it loads .env file
+if we want to add some new name like .config instead of .env then we should mention like
+load_env(".config")
+#here . means hidden file its industry standard
+
