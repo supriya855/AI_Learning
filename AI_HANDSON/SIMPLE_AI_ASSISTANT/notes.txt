@@ -13,3 +13,21 @@ if we want to add some new name like .config instead of .env then we should ment
 load_env(".config")
 #here . means hidden file its industry standard
 
+
+PARALLEL Tool Calls and Chained Tool Calls
+
+Parallel Tool Calls:
+-> 1. when user input has different questions 
+what is the weather in bengaluru and what is the current time
+two questions asked by user differently
+LLM knows it need 2 tool calls so it returns in one LLM calls
+
+chained tool calls:
+-> 1. when the input question is dependent
+
+what is the weather of city I live
+
+1st LLM returns one tool call get_city_user()
+
+then after it knows city name it can get_weather() tool call
+this chained (sequential tool calls)
