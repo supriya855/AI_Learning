@@ -4,7 +4,7 @@ from dotenv import load_dotenv #from package of dotenv we are importing load_dot
 load_dotenv() #loading the environment variables from .env file
 from openai import OpenAI # from package of openai we are importing OpenAI class
 from tools import TOOLS,FUNCTION_NAME_FUNCTION_METHOD #importing the tools from tools.py file
-
+MAX_TOOL_CALLS = 3
 
 messages = []
 messages.append({"role":"system","content":"Act as a techinal assistant respond with  10 words"})
@@ -18,33 +18,38 @@ while True:
         base_url=os.getenv("BASE_URL"),
         api_key=os.getenv("API_KEY")
     )
-    #1st call to LLM with tools
-    response = client.chat.completions.create(
-        model=os.getenv("MODEL"),
-        messages = messages,
-        tools = TOOLS
-    )
-    print("\nLLM 1st response with tools of weather"+ (str)(response))
-    msg = response.choices[0].message
-    if msg.tool_calls:
+
+    
+    for i in range(MAX_TOOL_CALLS):
+     
+        response = client.chat.completions.create(
+                model=os.getenv("MODEL"),
+                messages = messages,
+                tools = TOOLS
+            )
+        #print("\nLLM 1st response with tools of weather"+response)
+        msg = response.choices[0].message
+        
+        if not msg.tool_calls:
+                break;
+      
         messages.append(msg)# we are appending the tool call message to messages list so that we can send it to LLM in next call
         for tool_call in msg.tool_calls:
             fun_name = tool_call.function.name
             tool_args = tool_call.function.arguments
-            fn_args = json.loads(tool_args or "{}") # its in string of json ex: '{}' converting to dictionary 
-            fn = FUNCTION_NAME_FUNCTION_METHOD[fun_name]
-            result = fn(**fn_args)#convert key value separately
+            try:
+                fn_args = json.loads(tool_args or "{}") # its in string of json ex: '{}' converting to dictionary 
+                fn = FUNCTION_NAME_FUNCTION_METHOD[fun_name]
+            
+                result = fn(**fn_args)#convert key value separately
+            except Exception as e:
+                print(f"Error occurred while calling function {fun_name}: {e}")
+
             messages.append({
                 "role":"tool",
                 "tool_call_id":tool_call.id,
                 "content":str(result)
             })
-        #2nd call to LLM with tool results    
-        response = client.chat.completions.create(
-            model=os.getenv("MODEL"),
-            messages=messages
-        )
-        msg = response.choices[0].message
     messages.append({"role":msg.role,"content":msg.content})
     print("\nAssistant:" + msg.content)
     # print("\n\n----------------------------\n\n")
