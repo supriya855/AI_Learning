@@ -40,3 +40,12 @@ this chained (sequential tool calls)
 3. msg.content if its NONE we are appending into a assitant it throw type error string can't concatenate to NONe 
 so we are empty string if its NONe
 4. add debug logs
+
+
+*********Streaming Concept ****************
+=> when we run the model current we are waiting till the model response and printing at once so its taking time
+=> Streaming will not make the model fast its still the same time
+=> what it improves seeing first word or token on the screen
+instead of waiting for whole response (basically we are taking chunks chunks of data and displaying on the screen)
+
+TTFT = time to first token in (1 or 2 sec)
