@@ -31,3 +31,12 @@ what is the weather of city I live
 
 then after it knows city name it can get_weather() tool call
 this chained (sequential tool calls)
+
+# refactor code
+1. what if city weather endpoint is failed due to net available or something
+
+1. so we need add response.raise_for_status() # wher it tells its unavailable throws http error and its handled try catch block
+2. in function the arguments we mention required filed in case its city
+3. msg.content if its NONE we are appending into a assitant it throw type error string can't concatenate to NONe 
+so we are empty string if its NONe
+4. add debug logs
