@@ -49,3 +49,5 @@ so we are empty string if its NONe
 instead of waiting for whole response (basically we are taking chunks chunks of data and displaying on the screen)
 
 TTFT = time to first token in (1 or 2 sec)
+
+for the tools response it can also return in sometimes we need append all those tool response combine it and give as input
