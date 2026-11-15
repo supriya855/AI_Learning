@@ -43,26 +43,26 @@ call_list = []
 for key in sorted(calls):
     call_list.append(calls[key])
 
-for tool_call in call_list:
-    result = run_tool(tool_call)
-    message.append({"role":"tool","content": result})
+# for tool_call in call_list:
+#     result = run_tool(tool_call)
+#     message.append({"role":"tool","content": result})
 
 
 
-stream = client.chat.completions.create(
-    model = os.getenv("MODEL"),
-    messages = message,
-    stream = True
-)
+# stream = client.chat.completions.create(
+#     model = os.getenv("MODEL"),
+#     messages = message,
+#     stream = True
+# )
 
-for event in stream:
-    if not event.choices:
-        continue
-    piece = event.choices[0].delta
-    if piece.content:
-        #print(piece.content, end = "", flush = True)
-        full_response += piece.content
-print("\n\nFull response: " + full_response)
+# for event in stream:
+#     if not event.choices:
+#         continue
+#     piece = event.choices[0].delta
+#     if piece.content:
+#         #print(piece.content, end = "", flush = True)
+#         full_response += piece.content
+# print("\n\nFull response: " + full_response)
 
 # [ChoiceDeltaToolCall(index=0, id='call_v3tph87x', function=ChoiceDeltaToolCallFunction(arguments='{"city":"New York City"}', name='get_weather'), type='function')]
 # [ChoiceDeltaToolCall(index=1, id='call_cgi6qjg9', function=ChoiceDeltaToolCallFunction(arguments='{"city":"Seattle"}', name='get_weather'), type='function')]
