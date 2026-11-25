@@ -1,0 +1,5 @@
+All software development projects must follow the company's coding standards and version control guidelines. 
+Developers must create separate feature branches for new implementations and bug fixes. 
+Every code change requires approval from at least two reviewers before merging into the main branch. 
+Automated unit tests must pass before deployment.
+Production deployments are scheduled on Tuesdays and Thursdays between 6:00 PM and 9:00 PM. Critical production issues must be reported immediately to the technical support team. Developers must maintain updated technical documentation, including API specifications, architecture diagrams, dependency details, and troubleshooting procedures.
