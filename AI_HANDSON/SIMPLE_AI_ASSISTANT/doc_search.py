@@ -68,7 +68,7 @@ def search(query, documents,top_k =3):
 
 def test(user_query, documents, top_k=3):
     print(f"User Query : {user_query}")
-    results = search(user_query, documents, top_k=3)
+    results = search(user_query, documents, top_k)
     for r in results:
         print(f"Score : {r['score']:.2f} - Source : {r['source']} - Size : {r['size']}")
 
@@ -76,9 +76,9 @@ documents = load_documents()
 print(documents[0])
 documents = add_embedding(documents)
 
-print(f"We have embedded {len(documents)} documents")
+# print(f"We have embedded {len(documents)} documents")
 
-user_query = "How many sick leaves are present in total?"
+# user_query = "How many sick leaves are present in total?"
 
-test(user_query,documents,3)
+# test(user_query,documents,3)
 
